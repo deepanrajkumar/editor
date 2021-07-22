@@ -1,0 +1,26 @@
+{
+  "name": "editor",
+  "version": "1.0.0",
+  "description": "text editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepanrajkumar/editor.git"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "react",
+    "react",
+    "native"
+  ],
+  "author": "Deepan Raj Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deepanrajkumar/editor/issues"
+  },
+  "homepage": "https://github.com/deepanrajkumar/editor#readme"
+}
