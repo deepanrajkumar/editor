@@ -1,5 +1,7 @@
 const { MongoClient } = require("mongodb");
 
+const cors = require("cors");
+
 var express = require("express");
 var app = express();
 // or as an es module:
@@ -33,27 +35,23 @@ const connectDB = async (action, params) => {
   client.close();
 };
 
-const server = app.listen(8081, function () {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log("Example app listening at http://%s:%s", host, port);
-});
+app.listen(5000);
 
-app.get("/list", (req, res) => {
-  connectDB("get", req?.query)
+app.get("/list", cors(), (req, res) => {
+  connectDB("get")
     .then((data) => res.end(JSON.stringify(data)))
     .catch((error) => res.end(JSON.stringify(error)));
 });
 
-app.post("/add", (req, res) => {
-  connectDB("add", req?.query)
+app.get("/add", cors(), (req, res) => {
+  connectDB("add")
     .then((data) => res.end(JSON.stringify(data)))
     .catch((error) => res.end(JSON.stringify(error)));
 });
 
-app.post("/delete", function (req, res) {
-  res.end(JSON.stringify(data));
-});
+// app.post("/delete", function (req, res) {
+//   res.end(JSON.stringify(data));
+// });
 
 // const getList = (collection) => {
 //   const notes = collection.find({}).toArray();
