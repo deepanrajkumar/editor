@@ -12,7 +12,7 @@ const Title = Styled.h2`
 const App = () => {
   return (
     <div>
-      <Title>Hello world</Title>
+      <Title>Notes</Title>
       <CheckApis />
     </div>
   );

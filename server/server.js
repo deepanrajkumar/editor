@@ -2,8 +2,8 @@ const { MongoClient } = require("mongodb");
 
 const cors = require("cors");
 
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 // or as an es module:
 // import { MongoClient } from 'mongodb'
 
@@ -21,52 +21,42 @@ const connectDB = async (action, params) => {
   const db = client.db(dbName);
   const collection = db.collection("editorCollection");
 
-  params = [{ note: "test my note data" }];
-
   switch (action) {
     case "get":
       return await collection.find({}).toArray();
     case "add":
-      return await collection.insertMany([{ note: "test my note data" }]);
+      return await collection.insertMany([params]);
+    case "delete":
+      return await collection.deleteMany(params);
     default:
       break;
   }
-
   client.close();
 };
 
+app.use(cors());
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 app.listen(5000);
 
-app.get("/list", cors(), (req, res) => {
+app.get("/list", (req, res) => {
   connectDB("get")
     .then((data) => res.end(JSON.stringify(data)))
     .catch((error) => res.end(JSON.stringify(error)));
 });
 
-app.get("/add", cors(), (req, res) => {
-  connectDB("add")
+app.post("/add", (req, res) => {
+  connectDB("add", req.body)
     .then((data) => res.end(JSON.stringify(data)))
     .catch((error) => res.end(JSON.stringify(error)));
 });
 
-// app.post("/delete", function (req, res) {
-//   res.end(JSON.stringify(data));
-// });
-
-// const getList = (collection) => {
-//   const notes = collection.find({}).toArray();
-//   console.log(`notes`, notes);
-//   return "get done.";
-// };
-
-// const insertResult = collection.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }]);
-
-// async function main() {
-//   // Use connect method to connect to the server
-//   await client.connect();
-//   console.log("Connected successfully to server");
-//   const db = client.db(dbName);
-//   const collection = db.collection("editorCollection");
+app.delete("/delete", (req, res) => {
+  connectDB("delete", req.body)
+    .then((data) => res.end(JSON.stringify(data)))
+    .catch((error) => res.end(JSON.stringify(error)));
+});
 
 //   // the following code examples can be pasted here...
 //   const insertResult = await collection.insertMany([
