@@ -40,6 +40,8 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 app.listen(5000);
 
+app.use("/", express.static("../dist"));
+
 app.get("/list", (req, res) => {
   connectDB("get")
     .then((data) => res.end(JSON.stringify(data)))
