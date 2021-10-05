@@ -1,20 +1,33 @@
 import React from "react";
 import Styled from "styled-components";
-import CheckApis from "../Modules/CheckApis";
 import "./styles.css";
+import "../Configs";
+import MainContainer from "../Modules/MainContainer";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 
 const Title = Styled.h2`
   font-size: 1.5em;
   text-align: center;
-  color: red;
 `;
 
 const App = () => {
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: "dark",
+        },
+      }),
+    []
+  );
   return (
-    <div>
-      <Title>Notes</Title>
-      <CheckApis />
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <Title>Home server</Title>
+        <MainContainer />
+      </div>
+    </ThemeProvider>
   );
 };
 

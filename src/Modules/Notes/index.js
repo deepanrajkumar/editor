@@ -14,8 +14,9 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import BackspaceIcon from "@mui/icons-material/Backspace";
 
-const CheckApis = () => {
+const Notes = () => {
   const resetNote = {
     title: "",
     note: "",
@@ -27,19 +28,21 @@ const CheckApis = () => {
 
   const listNotes = () => {
     axios({ method: "get", url: "list" })
-      .then((resp) => setList(resp.data))
+      .then((list) => setList(list.data))
       .catch(console.error);
   };
 
   const testPost = () => {
-    axios({
-      method: "post",
-      url: "add",
-      data: note,
-    }).then(() => {
-      setNote(resetNote);
-      listNotes();
-    });
+    if (note.title || note.note || note.link) {
+      axios({
+        method: "post",
+        url: "add",
+        data: note,
+      }).then(() => {
+        setNote(resetNote);
+        listNotes();
+      });
+    }
   };
 
   const testDelete = (params) => {
@@ -132,7 +135,7 @@ const CheckApis = () => {
             <Button
               variant="contained"
               size="large"
-              startIcon={<DeleteIcon />}
+              startIcon={<BackspaceIcon />}
               onClick={() => setNote(resetNote)}
             >
               Clear Notes
@@ -144,4 +147,4 @@ const CheckApis = () => {
   );
 };
 
-export default CheckApis;
+export default Notes;
