@@ -1,0 +1,3 @@
+[submodule "editor-deploy"]
+	path = editor-deploy
+	url = git@github.com:deepanrajkumar/editor-deploy.git
