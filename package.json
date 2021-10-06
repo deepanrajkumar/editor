@@ -4,9 +4,9 @@
   "description": "text editor",
   "main": "index.js",
   "scripts": {
-    "start:server": "node ./server/server.js",
+    "start:server": "node editor-deploy/server.js",
     "test": "jest --config ./jest.config.json",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --config ./webpack.config.js",
     "start": "webpack-dev-server --mode development --open --hot",
     "build:prod": "webpack --mode production",
     "clear-build-cache": "rm -rf .cache/ dist/",

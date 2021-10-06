@@ -1,7 +1,11 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const path = require("path");
 
 module.exports = {
+  entry: {
+    index: "./src/index.js",
+  },
   module: {
     rules: [
       {
@@ -69,4 +73,8 @@ module.exports = {
     }),
     new Dotenv(),
   ],
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "./editor-deploy/ui"),
+  },
 };
