@@ -23,7 +23,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
       <div>
         <Title>Home server</Title>
         <MainContainer />
