@@ -2,10 +2,10 @@ import React from "react";
 import { Box } from "@mui/material";
 import Notes from "./Notes";
 
-const MainContainer = () => {
+const MainContainer = ({ setLoader }) => {
   return (
     <Box>
-      <Notes />
+      <Notes setLoader={setLoader} />
     </Box>
   );
 };

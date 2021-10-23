@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Styled from "styled-components";
 import "./styles.css";
 import "../Configs";
 import MainContainer from "../Modules/MainContainer";
-import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  LinearProgress,
+} from "@mui/material";
 
 const Title = Styled.h2`
   font-size: 1.5em;
@@ -20,12 +25,16 @@ const App = () => {
       }),
     []
   );
+
+  const [loader, setLoader] = useState(true);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div>
+        <div style={{ height: "4px" }}>{loader && <LinearProgress />}</div>
         <Title>Home server</Title>
-        <MainContainer />
+        <MainContainer setLoader={(status) => setLoader(status)} />
       </div>
     </ThemeProvider>
   );
